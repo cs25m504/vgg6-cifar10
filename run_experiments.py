@@ -6,7 +6,7 @@ import time
 activations = ["sigmoid", "relu", "silu", "gelu", "tanh"]
 optimizers = ["sgd", "nesterov", "adam", "adagrad", "rmsprop", "nadam"]
 
-epochs = 30
+epochs = 50
 batch_size = 64
 learning_rate = 0.001
 seed = 42
