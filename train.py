@@ -110,8 +110,16 @@ def main():
         train_acc = 100.0 * correct / total
         val_loss, val_acc = evaluate(model, test_loader, device)
 
+        #if val_acc > best_val_acc:
+        #    best_val_acc = val_acc
+        #    torch.save(model.state_dict(), "best_model.pth")
+        
         if val_acc > best_val_acc:
             best_val_acc = val_acc
+            # Save a run-specific checkpoint file
+            checkpoint_name = f"model_{args.activation}_{args.optimizer}_acc_{val_acc:.2f}.pth"
+            torch.save(model.state_dict(), checkpoint_name)
+            # Also overwrite best_model.pth to track the overall best model across training
             torch.save(model.state_dict(), "best_model.pth")
 
         print(f"Epoch [{epoch+1}/{args.epochs}] - Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}% | Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.2f}%")
